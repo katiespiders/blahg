@@ -21,3 +21,21 @@ servicesModule.factory('apiService', ['$http', function($http) {
     }
   }
 }]);
+
+servicesModule.factory('postService', function() {
+
+  return {
+    test: function() {
+      return "i got the post service";
+    },
+
+    allPosts: function(posts) {
+      return posts;
+    },
+
+    addPost: function(posts, newPost) {
+      posts.push(newPost);
+      return posts;
+    }
+  }
+});

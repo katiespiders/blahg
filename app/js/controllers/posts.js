@@ -1,20 +1,20 @@
 var postsControllerModule = angular.module('postsControllerModule', []);
 
-postsControllerModule.controller('postsController', ['$scope', '$http', 'apiService', function($scope, $http, apiService) {
+postsControllerModule.controller('postsController', ['$scope', '$http', 'apiService', 'postService', function($scope, $http, apiService, postService) {
 
-  $scope.posts = []
+  $scope.posts = [];
 
   apiService.get('/posts').success(function(data) {
     $scope.posts = data;
   });
 
-  $scope.tags = []
+  $scope.tags = [];
 
   apiService.get('/tags').success(function(data) {
     $scope.tags = data;
-  })
+  });
 
-  $scope.filterTags = []
+  $scope.filterTags = [];
 
   $scope.getTagName = function(id) {
     for (i=0; i<$scope.tags.length; i++) {
@@ -22,7 +22,7 @@ postsControllerModule.controller('postsController', ['$scope', '$http', 'apiServ
         return $scope.tags[i].name;
       }
     }
-  }
+  };
 
   $scope.addTag = function(id) {
     i = $scope.filterTags.indexOf(id);
@@ -31,14 +31,15 @@ postsControllerModule.controller('postsController', ['$scope', '$http', 'apiServ
     } else {
       $scope.filterTags.splice(i, 1);
     }
-  }
+  };
 }]);
 
-postsControllerModule.controller('newPostController', ['$scope', '$http', 'apiService', function($scope, $http, apiService) {
+postsControllerModule.controller('newPostController', ['$scope', '$http', 'apiService', 'postService', function($scope, $http, apiService, postService) {
 
-  $scope.tags = []
-  $scope.newPost = {}
-  $scope.newPost.tag_ids = []
+  $scope.tags = [];
+  $scope.newPost = {};
+  $scope.newPost.tag_ids = [];
+  $scope.test = postService.test;
 
   apiService.get('/tags').success(function(data) {
     $scope.tags = data;
@@ -46,7 +47,7 @@ postsControllerModule.controller('newPostController', ['$scope', '$http', 'apiSe
 
   $scope.submitNewPost = function() {
     apiService.postPost($scope.newPost);
-  }
+  };
 
   $scope.toggleId = function(id) {
     i = $scope.newPost.tag_ids.indexOf(id);
@@ -55,7 +56,7 @@ postsControllerModule.controller('newPostController', ['$scope', '$http', 'apiSe
     } else {
       $scope.newPost.tag_ids.splice(i, 1);
     }
-  }
+  };
 }]);
 
 postsControllerModule.controller('postController', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
