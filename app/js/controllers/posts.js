@@ -7,9 +7,15 @@ postsControllerModule.controller('postsController', ['$scope', '$http', 'apiServ
     $scope.posts = data;
   });
 
-  $scope.allPosts = postService.allPosts();
-  console.log($scope.allPosts);
-  
+  // $scope.posts = postService.allPosts();
+  // console.log($scope.posts);
+
+  // postService.allPosts().success(function(data) {
+  //   console.log(data);
+  //   $scope.posts = data;
+  // });
+  // console.log($scope.posts);
+
   $scope.tags = [];
 
   apiService.get('/tags').success(function(data) {

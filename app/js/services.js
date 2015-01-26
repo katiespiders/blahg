@@ -10,7 +10,7 @@ servicesModule.factory('apiService', ['$http', function($http) {
 
     postPost: function(post) {
 
-      return $http.post('http://localhost:3000/posts',
+      return $http.post(url + '/posts',
         {
           post: {
             title: post.title,
@@ -29,11 +29,19 @@ servicesModule.factory('postService', ['apiService', function(apiService) {
       return "i got the post service";
     },
 
-    allPosts: function() {
-      posts = [];
-      apiService.get('/posts').success(function(data) {
-        return data;
-      });
+    // allPosts: function() {
+    //   var posts = [];
+    //   apiService.get('/posts').success(function(data) {
+    //     console.log(data);
+    //     posts = data;
+    //     console.log(posts);
+    //   });
+    //
+    //   console.log(posts);
+    //   return posts;
+    // },
+    postsIndex: function(posts) {
+      return posts;
     },
 
     addPost: function(posts, newPost) {
