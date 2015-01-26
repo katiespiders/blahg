@@ -3,11 +3,13 @@ var postsControllerModule = angular.module('postsControllerModule', []);
 postsControllerModule.controller('postsController', ['$scope', '$http', 'apiService', 'postService', function($scope, $http, apiService, postService) {
 
   $scope.posts = [];
-
   apiService.get('/posts').success(function(data) {
     $scope.posts = data;
   });
 
+  $scope.allPosts = postService.allPosts();
+  console.log($scope.allPosts);
+  
   $scope.tags = [];
 
   apiService.get('/tags').success(function(data) {
@@ -46,6 +48,7 @@ postsControllerModule.controller('newPostController', ['$scope', '$http', 'apiSe
   });
 
   $scope.submitNewPost = function() {
+    $scope.posts = [];
     apiService.postPost($scope.newPost);
   };
 

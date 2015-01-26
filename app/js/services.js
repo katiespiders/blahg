@@ -19,23 +19,26 @@ servicesModule.factory('apiService', ['$http', function($http) {
           }
         });
     }
-  }
+  };
 }]);
 
-servicesModule.factory('postService', function() {
+servicesModule.factory('postService', ['apiService', function(apiService) {
 
   return {
     test: function() {
       return "i got the post service";
     },
 
-    allPosts: function(posts) {
-      return posts;
+    allPosts: function() {
+      posts = [];
+      apiService.get('/posts').success(function(data) {
+        return data;
+      });
     },
 
     addPost: function(posts, newPost) {
       posts.push(newPost);
       return posts;
     }
-  }
-});
+  };
+}]);
