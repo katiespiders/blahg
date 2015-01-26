@@ -39,7 +39,7 @@ postsControllerModule.controller('newPostController', ['$scope', '$http', 'apiSe
   $scope.tags = [];
   $scope.newPost = {};
   $scope.newPost.tag_ids = [];
-  $scope.test = postService.test;
+  $scope.test = postService.test();
 
   apiService.get('/tags').success(function(data) {
     $scope.tags = data;
