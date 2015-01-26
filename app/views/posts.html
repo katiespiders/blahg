@@ -1,6 +1,26 @@
 <div ng-controller="postsController">
-  <a ui-sref=".new">new post</a>
-  <div ui-view="new">
+
+  title search: <input type="text" ng-model="search.title" />
+  content search: <input type="text" ng-model="search.content" />
+  <span ng-repeat="tag in tags">
+    <input type="checkbox" value="tag.id" ng-click="addTag(tag.id)">{{tag.name}}</input></span>
+    <a ui-sref=".new">new post</a>
+    <div ui-view="new">
+
+    </div>
     
+  <div ng-repeat="post in posts | filter:search:strict | selectedTags:filterTags:true">
+
+
+    <a ui-sref="show({id: post.id})">
+      <h2>{{post.title}}</h2>
+    </a>
+
+    <small ng-repeat="tag_id in post.tag_ids">{{getTagName(tag_id)}} </small>
+    <small>{{post.date | date:'EEEE, d MMMM, yyyy'}}</small>
+    <p>
+      {{post.content}}
+    </p>
+    <hr>
   </div>
 </div>
